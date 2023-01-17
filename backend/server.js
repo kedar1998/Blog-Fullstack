@@ -10,10 +10,12 @@ import 'express-async-errors'
 app.use(express.json())
 
 // ROUTES IMPORT
-import userRoute from './routes/user.js'
+import userRoute from './routes/userRoute.js'
+import blogRoute from './routes/blogRoute.js'
 
 // ROUTES
 app.use("/api/v1/user", userRoute)
+app.use("/api/v1/blog", blogRoute)
 
 app.listen(3000, () =>{
     connect(process.env.DATABASE)
