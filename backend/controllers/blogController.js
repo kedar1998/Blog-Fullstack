@@ -1,21 +1,43 @@
-const getAllBlogs = (req,res) =>{
-    res.json({msg: "Get All Blogs"})
+import Blog from '../models/Blog.js'
+
+const getAllBlogs = async (req,res) =>{
+
+    const blog = await Blog.find({})
+
+    res.json({
+        Status: "Success",
+        count: blog.length,
+        blog
+    })
 }
 
-const createBlog = (req,res) =>{
-    res.json({msg: "Create Blog"})
+const createBlog = async (req,res) =>{
+    const blog = await Blog.create(req.body)
+    res.json({Status: "Success", blog})
 }
 
-const getBlog = (req,res) =>{
-    res.json({msg: "Get Single Blog"})
+const getBlog = async (req,res) =>{
+    const {id} = req.params
+    const blog = await Blog.find({_id: id})
+    res.json({
+        Status: "Success",
+        blog
+    })
 }
 
-const updateBlog = (req,res) =>{
-    res.json({msg: "Update Blog"})
+const updateBlog = async (req,res) =>{
+
+    const {id} = req.params
+    const blog = await Blog.findByIdAndUpdate({_id: id}, req.body, {new: true, runValidators: true})
+
+    res.json({Status: "Success", blog})
 }
 
-const deleteBlog = (req,res) =>{
-    res.json({msg: "Delete Blog"})
+const deleteBlog = async (req,res) =>{
+    const {id} = req.params
+    const blog = await Blog.deleteOne({_id: id})
+
+    res.json({Status: "Successfully Deleted"})
 }
 
 export {getAllBlogs, createBlog, getBlog, updateBlog, deleteBlog}
