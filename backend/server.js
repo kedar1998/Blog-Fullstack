@@ -17,12 +17,12 @@ import blogRoute from './routes/blogRoute.js'
 
 // ROUTES
 app.use("/api/v1/user", userRoute)
-app.use("/api/v1/blog", authenticate, blogRoute)
+app.use("/api/v1/blog", blogRoute)
 
 app.use(errorHandlerMiddleware)
 
 
-app.listen(3000, () =>{
+app.listen(5000, () =>{
     connect(process.env.DATABASE)
-    console.log("Listinging on 3000");
+    console.log("Listinging on 5000");
 })
