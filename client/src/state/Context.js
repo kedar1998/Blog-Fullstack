@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useReducer} from 'react'
 import reducer from './reducer'
+import axios from 'axios'
 
 const initialState = {
     count: 0,
@@ -14,6 +15,8 @@ const Context = ({children}) => {
     const add = () =>{
         dispatch({type: "add"})
     }
+
+    
 
   return (
     <appContext.Provider value={{...state, add}}>

@@ -1,5 +1,7 @@
 import { useAppcontext } from "./state/Context";
-
+import {Routes, Route, Link} from 'react-router-dom'
+import Landing from "./Pages/Landing";
+import Register from "./Pages/Register";
 
 function App() {
 
@@ -7,11 +9,10 @@ function App() {
 
   return (
     <div>
-      app
-      <div>
-        {count}
-        <button onClick={add}>Add</button>
-      </div>
+      <Routes>
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
     </div>
   );
 }
