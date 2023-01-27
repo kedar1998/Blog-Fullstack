@@ -12,14 +12,21 @@ const Context = ({children}) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const add = () =>{
-        dispatch({type: "add"})
+    const register = async (currentUser) =>{
+       
+        try{
+            const response = await axios.post('/api/v1/user/register', currentUser)
+            console.log(response);
+        }
+        catch (err){
+            console.log(err.response.data.msg);
+        }
     }
 
     
 
   return (
-    <appContext.Provider value={{...state, add}}>
+    <appContext.Provider value={{...state, register}}>
         {children}
     </appContext.Provider>
   )
