@@ -16,17 +16,24 @@ const Context = ({children}) => {
        
         try{
             const response = await axios.post('/api/v1/user/register', currentUser)
+            // const response2 = await axios.get('/api/v1/blog/getAllBlogs')
             console.log(response);
+            // console.log(response2);
         }
         catch (err){
             console.log(err.response.data.msg);
         }
     }
 
+    const loginUser = async (currentUser) =>{
+        const response = await axios.post("/api/v1/user/login", currentUser)
+        console.log(response);
+    }
+
     
 
   return (
-    <appContext.Provider value={{...state, register}}>
+    <appContext.Provider value={{...state, register, loginUser}}>
         {children}
     </appContext.Provider>
   )
