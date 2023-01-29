@@ -3,7 +3,12 @@ import reducer from './reducer'
 import axios from 'axios'
 
 const initialState = {
-    count: 0,
+    user: '',
+    token: '',
+    isLoading: false,
+    showAlert: false,
+    alertText: '',
+    alertType: '',
 }
 
 const appContext = createContext()
@@ -11,6 +16,15 @@ const appContext = createContext()
 const Context = ({children}) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
+
+
+
+    const addusertotlocalstorage = ({user, token}) =>{
+        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('token', token)
+    }
+
+
 
     const register = async (currentUser) =>{
        
@@ -26,8 +40,10 @@ const Context = ({children}) => {
     }
 
     const loginUser = async (currentUser) =>{
-        const response = await axios.post("/api/v1/user/login", currentUser)
-        console.log(response);
+        const {data} = await axios.post("/api/v1/user/login", currentUser)
+        const {user, token} = data
+
+        addusertotlocalstorage({user, token})
     }
 
     
