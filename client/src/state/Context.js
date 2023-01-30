@@ -42,7 +42,6 @@ const Context = ({children}) => {
     const loginUser = async (currentUser) =>{
         const {data} = await axios.post("/api/v1/user/login", currentUser)
         const {user, token} = data
-
         addusertotlocalstorage({user, token})
     }
 
